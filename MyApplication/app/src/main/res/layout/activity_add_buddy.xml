@@ -54,20 +54,21 @@
         android:layout_alignBottom="@+id/editText" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Add"
         android:id="@+id/button5"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="61dp"
-        android:onClick="Add" />
+        android:onClick="Add"
+        android:background="#ff636fff"
+        android:textColor="#ffffe1eb" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/button5"
