@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:weightSum="1"
-    android:background="#ff91f265">
-
+    android:background="#ffacff2d">
 
     <Button
         android:layout_width="fill_parent"
@@ -12,11 +11,11 @@
         android:id="@+id/button"
         android:layout_gravity="bottom"
         android:layout_weight="0.37"
-        android:onClick="onButtonClick"
+        android:onClick="onClick"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#ff21e0ff" />
+        android:background="#ff0fff00" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
@@ -26,28 +25,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Enter the Max limit (Distance)"
-        android:id="@+id/textView5"
-        android:layout_marginTop="72dp"
-        android:layout_below="@+id/map"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#ffe4e2e7" />
-    
+        android:layout_above="@+id/button" />
 
 </RelativeLayout>

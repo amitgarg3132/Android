@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -23,7 +24,7 @@ import java.text.DecimalFormat;
 
 import static java.lang.String.*;
 
-public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerDragListener{
+public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerDragListener,OnMapClickListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private Marker test;
@@ -36,6 +37,9 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         setUpMapIfNeeded();
         test = mMap.addMarker(new MarkerOptions().position(new LatLng(28.6139391, 0)).title("Marker").draggable(true));
         mMap.setOnMarkerDragListener(this);
+        mMap.setMyLocationEnabled(true);
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
         myDB = new DataBaseHelper(this);
     }
 
@@ -116,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         }
         else{
             EditText e1 =(EditText)findViewById(R.id.editText);
-            int max = Integer.parseInt(e1.getText().toString());
+            double max = Double.parseDouble(e1.getText().toString());
             LatLng l1 = test.getPosition();
 
             StringBuffer test = new StringBuffer();
@@ -131,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
             if(test.toString().length() <= 1)
                 showMessage("Relax", "No other nearBy work found");
             else
-                showMessage("found some other work too",test.toString());
+                showMessage("found some other work too", test.toString());
         }
 
     }
@@ -143,22 +147,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         builder.show();
     }
 
-    public boolean checkDistance(Double d){
-        EditText e1 = (EditText)findViewById(R.id.editText);
-        TextView t1 = (TextView)findViewById(R.id.textView2);
 
-        String temp = e1.getText().toString();
-        double temp2 = Integer.parseInt(temp);
-
-        if (d<=temp2){
-            t1.setText("yes distance is shorter");
-            return true;
-        }
-        else {
-            t1.setText("distance is greater");
-            return false;
-        }
-    }
 
     @Override
     public void onMarkerDragStart(Marker marker) {
@@ -175,5 +164,18 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
     public void onMarkerDragEnd(Marker marker) {
 
 
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        test.setPosition(latLng);
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        CameraUpdate update = CameraUpdateFactory.newLatLng(marker.getPosition());
+        mMap.animateCamera(update);
+        return false;
     }
 }
